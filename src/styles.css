@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+body {
+    margin: 0;
+    padding: 0;
+}
+.example-container {
+    width: 100%;
+    min-height:100vh;
+}
+.left-side {
+    width: 30%;
+    height: 100vh;
+}
+.right-side {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.company-name-input, .prescriber-name-input, .patient-name-input, .patient-dob-input {
+    margin: 10px;
+}
+
+.pdf-iframe {
+    margin: 0;
+    padding: 0;
+    border-width: 0px;
+    width: 100%;
+    min-height: 100vh;
+}

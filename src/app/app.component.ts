@@ -1,31 +1,83 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+
+import NoorInfo from '../assets/NoorInfo.json';
+import Prescribers from '../assets/prescribers.json';
+import AZAndMeFormat from '../assets/AZAndMeFormat.json';
+const companies = {
+  'AstraZeneca': AZAndMeFormat,
+};
+
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+
 
 @Component({
   selector: 'app-root',
-  template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    
-  `,
+  templateUrl: './app.component.html',
   styles: []
 })
 export class AppComponent {
-  title = 'patient-assistance';
+  title = 'Patient Assistance Form Filler';
+  myControl = new FormControl();
+  drug_companies: string[] = ['AstraZeneca'];
+  options: string[] = Object.keys(Prescribers);
+  filteredOptions: Observable<string[]>;
+  infoForm = new FormBuilder().group({'patient-name': '', 'patient-dob': '', 'prescriber':'', 'company':''});
+
+  ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+    console.log(NoorInfo);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  clickGenerateButton(patient, dob, prescriber, company) {
+    let info = {}
+    let splt = patient.split(' ');
+    info['patient_first'] = splt[0];
+    info['patient_last'] = splt[1];
+    splt = dob.split('/');
+    info['patient_dob_month'] = splt[0];
+    info['patient_dob_day'] = splt[1];
+    info['patient_dob_year'] = splt[2];
+
+    let pdfInfo = {...info, ...Prescribers[prescriber], ...NoorInfo}
+    console.log(pdfInfo);
+    fillPDF("assets/azandme_application.pdf", pdfInfo, companies[company]);
+  }
+}
+
+function renderInIframe(pdfBytes) {
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const blobUrl = URL.createObjectURL(blob);
+    document.getElementById('iframe').src = blobUrl;
+}
+
+async function getPDF(url) {
+    const pdfBuffer = await fetch(url).then((res) => res.arrayBuffer())
+    const pdfDoc = await PDFDocument.load(pdfBuffer)
+    return pdfDoc
+}
+
+async function fillPDF(url, info, boxes) {
+    let pdf = await getPDF(url)
+    const pages = pdf.getPages();
+    boxes.forEach(box => {
+        pages[box.page].drawText(info[box.attribute], {
+            x: box.x,
+            y: box.y,
+            size: 12
+        })
+    })    
+    let pdfBytes = await pdf.save()
+    renderInIframe(pdfBytes)
 }

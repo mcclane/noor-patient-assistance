@@ -1,0 +1,48 @@
+<html>
+    <body>
+        <mat-drawer-container class="example-container">
+            <mat-drawer mode="side" opened class="left-side">
+                <div>
+                    <mat-tab-group>
+                        <mat-tab label="Prescriber/Patient">
+                            <form class="example-form" [formGroup]="infoForm" (ngSubmit)="clickGenerateButton(patient.value, dob.value, prescriber.value, company.value)">
+                                <mat-form-field class="patient-name-input">
+                                    <input #patient type="text" matInput placeholder="Patient Name" formControlName="patient-name">
+                                </mat-form-field>
+                                <mat-form-field class="patient-dob-input">
+                                    <input #dob type="text" matInput placeholder="Patient DOB (MM/DD/YYYY)" formControlName="patient-dob">
+                                </mat-form-field>
+                                <br>
+                                <mat-form-field class="prescriber-name-input">
+                                    <input #prescriber type="text" matInput placeholder="Prescriber" [formControl]="myControl" [matAutocomplete]="auto" formControlName="prescriber">
+                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                                <mat-form-field class="company-name-input">
+                                    <mat-label>Drug Company</mat-label>
+                                    <mat-select #company formControlName="company">
+                                        <mat-option *ngFor="let company of drug_companies" [value]="company">
+                                            {{company}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <button type="submit" mat-stroked-button color="accent">Generate PDF</button>
+                            </form>
+                            <br>
+                        </mat-tab>
+                        <mat-tab label="Options">
+                            <h1>options</h1>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </mat-drawer>
+            <mat-drawer-content class="right-side">
+                <iframe class="pdf-iframe" id='iframe'>Your PDF will show up here</iframe>
+            </mat-drawer-content>
+        </mat-drawer-container>
+    </body>
+</html>
