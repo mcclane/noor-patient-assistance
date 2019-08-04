@@ -59,7 +59,9 @@ export class AppComponent {
 function renderInIframe(pdfBytes) {
     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
     const blobUrl = URL.createObjectURL(blob);
-    document.getElementById('iframe').src = blobUrl;
+    let iframe: any;
+    iframe = document.getElementById('iframe');
+    iframe.src = blobUrl;
 }
 
 async function getPDF(url) {

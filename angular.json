@@ -26,7 +26,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": ["https://unpkg.com/pdf-lib@1.0.0/dist/pdf-lib.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {
