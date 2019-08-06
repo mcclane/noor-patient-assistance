@@ -16,14 +16,14 @@
                                 <mat-form-field class="prescriber-name-input">
                                     <input #prescriber type="text" matInput placeholder="Prescriber" [formControl]="myControl" [matAutocomplete]="auto" formControlName="prescriber">
                                     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                        <mat-option *ngFor="let option of filteredPrescriberOptions | async" [value]="option">
                                             {{option}}
                                         </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>
                                 <mat-form-field class="company-name-input">
                                     <mat-label>Drug Company</mat-label>
-                                    <mat-select #company formControlName="company">
+                                    <mat-select #company formControlName="company" [value]="AstraZeneca">
                                         <mat-option *ngFor="let company of drug_companies" [value]="company">
                                             {{company}}
                                         </mat-option>
@@ -35,7 +35,13 @@
                             <br>
                         </mat-tab>
                         <mat-tab label="Options">
-                            <h1>options</h1>
+                            <mat-list>
+                                    <mat-list-item *ngFor="let option of configOptions">
+                                        <mat-form-field>
+                                            <input matInput type="text" [placeholder]="option" [value]="config[option]">
+                                        </mat-form-field>
+                                    </mat-list-item>
+                            </mat-list>
                         </mat-tab>
                     </mat-tab-group>
                 </div>

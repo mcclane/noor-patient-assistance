@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { } from '@angular/material/autocomplete';
-import { MatButtonModule, MatSelectModule, MatSidenavModule, MatDividerModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule, MatTabsModule } from '@angular/material';
+import { MatListModule, MatTreeModule, MatButtonModule, MatSelectModule, MatSidenavModule, MatDividerModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule, MatTabsModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 
 @NgModule({
     imports: [
+        MatListModule,
+        MatTreeModule,
         MatSidenavModule,
         MatAutocompleteModule, 
         MatInputModule,
@@ -18,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
         MatButtonModule,
     ],
     exports: [
+        MatListModule,
+        MatTreeModule,
         MatSidenavModule,
         MatAutocompleteModule, 
         MatInputModule, 
