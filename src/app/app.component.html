@@ -23,7 +23,7 @@
                                 </mat-form-field>
                                 <mat-form-field class="company-name-input">
                                     <mat-label>Drug Company</mat-label>
-                                    <mat-select #company formControlName="company" [value]="AstraZeneca">
+                                    <mat-select #company formControlName="company" value="AstraZeneca">
                                         <mat-option *ngFor="let company of drug_companies" [value]="company">
                                             {{company}}
                                         </mat-option>

@@ -1,0 +1,123 @@
+{
+    "shapes": {
+        "check": "x"
+    },
+    "noor": {
+        "practice_name": "SLO Noor Clinic",
+        "address": {
+            "street": "1428 Phillips Lane, B-4",
+            "city": "San Luis Obispo",
+            "state": "CA",
+            "zip": "93401"
+        },
+        "phone": {
+            "areacode": "805",
+            "body": "439-1797"
+        },
+        "fax": {
+            "areacode": "805",
+            "body": "439-1799"
+        },
+        "office_contact": {
+            "name": "Audrey Fleming",
+            "phone": {
+                "areacode": "805",
+                "body": "215-3959"
+            }
+        },
+        "email": "afleming@slonoorfoundation.org"
+    },
+    "prescribers": {
+        "Russell Ness MD": {
+            "first": "Russell",
+            "last": "Ness",
+            "name": "Russell Ness, MD",
+            "type": "MD",
+            "DEA": "",
+            "NPI": "1770552978",
+            "SLN": "G 27268"
+        }
+    },
+    "companies": {
+        "AstraZeneca": { 
+            "pdf": "assets/azandme_application.pdf",
+            "boxes": [
+                {"attribute": "patient.dob.month", "page": 2, "x": 325, "y": 632, "size": 10},
+                {"attribute": "patient.dob.day", "page": 2, "x": 357, "y": 632, "size": 10},
+                {"attribute": "patient.dob.year", "page": 2, "x": 390, "y": 632, "size": 10},
+                {"attribute": "patient.first", "page": 2, "x": 100, "y": 600, "size": 10},
+                {"attribute": "patient.last", "page": 2, "x": 450, "y": 600, "size": 10},
+                {"attribute": "noor.address.street", "page": 2, "x": 100, "y": 570, "size": 10},
+                {"attribute": "noor.address.city", "page": 2, "x": 285, "y": 570, "size": 10},
+                {"attribute": "noor.address.state", "page": 2, "x": 420, "y": 570, "size": 10},
+                {"attribute": "noor.address.zip", "page": 2, "x": 510, "y": 570, "size": 10},
+                {"attribute": "noor.phone.areacode", "page": 2, "x": 90, "y": 531, "size": 10},
+                {"attribute": "noor.phone.body", "page": 2, "x": 125, "y": 531, "size": 10},
+                {"attribute": "noor.email", "page": 2, "x": 441, "y": 531, "size": 9},
+                {"attribute": "prescriber.name", "page": 2, "x": 125, "y": 412, "size": 10},
+                {"attribute": "noor.phone.areacode", "page": 2, "x": 330, "y": 412, "size": 10},
+                {"attribute": "noor.phone.body", "page": 2, "x": 365, "y": 412, "size": 10},
+                {"attribute": "noor.fax.areacode", "page": 2, "x": 455, "y": 412, "size": 10},
+                {"attribute": "noor.fax.body", "page": 2, "x": 498, "y": 412, "size": 10},
+                {"attribute": "noor.address.street", "page": 2, "x": 100, "y": 392, "size": 10},
+                {"attribute": "noor.address.city", "page": 2, "x": 285, "y": 392, "size": 10},
+                {"attribute": "noor.address.state", "page": 2, "x": 420, "y": 392, "size": 10},
+                {"attribute": "noor.address.zip", "page": 2, "x": 510, "y": 392, "size": 10},
+                {"attribute": "prescriber.DEA", "page": 2, "x": 70, "y": 374, "size": 10},
+                {"attribute": "prescriber.NPI", "page": 2, "x": 260, "y": 374, "size": 10},
+                {"attribute": "prescriber.SLN", "page": 2, "x": 490, "y": 374, "size": 10},
+                {"attribute": "noor.office_contact.name", "page": 2, "x": 135, "y": 353, "size": 10},
+                {"attribute": "noor.office_contact.phone.areacode", "page": 2, "x": 260, "y": 353, "size": 10},
+                {"attribute": "noor.office_contact.phone.body", "page": 2, "x": 295, "y": 353, "size": 10},
+                {"attribute": "noor.practice_name", "page": 2, "x": 420, "y": 353, "size": 10},
+                {"attribute": "shapes.check", "page": 2, "x": 290, "y": 220, "size": 12},
+
+                {"attribute": "patient.first", "page": 3, "x": 85, "y": 666, "size": 10},
+                {"attribute": "patient.last", "page": 3, "x": 280, "y": 666, "size": 10},
+                {"attribute": "shapes.check", "page": 3, "x": 305, "y": 375, "size": 12},
+                {"attribute": "shapes.check", "page": 3, "x": 286, "y": 190, "size": 12}
+            ]
+        }
+    },
+    "default": {
+        "patient": {
+            "dob": {
+                "month": "",
+                "day": "",
+                "year": ""
+            },
+            "first": "",
+            "last": ""
+        },
+        "prescriber": {
+            "first": "",
+            "last": "",
+            "name": "",
+            "type": "",
+            "DEA": "",
+            "NPI": "",
+            "SLN": ""
+        },
+        "company": "AstraZeneca"
+    },
+    "patient": {
+        "dob": {
+            "month": "",
+            "day": "",
+            "year": ""
+        },
+        "first": "",
+        "last": ""
+    },
+    "prescriber": {
+        "first": "",
+        "last": "",
+        "name": "",
+        "type": "",
+        "DEA": "",
+        "NPI": "",
+        "SLN": ""
+    },
+    "company": "AstraZeneca"
+
+}
