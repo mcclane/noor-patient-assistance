@@ -11,31 +11,132 @@
             "zip": "93401"
         },
         "phone": {
+            "full": "(805) 439 1797",
             "areacode": "805",
-            "body": "439-1797"
+            "body": "439 1797",
+            "body1": "439",
+            "body2": "1797"
         },
         "fax": {
+            "full": "(805) 439 1799",
             "areacode": "805",
-            "body": "439-1799"
+            "body": "439 1799",
+            "body1": "439",
+            "body2": "1799"
+
         },
         "office_contact": {
             "name": "Audrey Fleming",
             "phone": {
+                "full": "(805) 215 3959",
                 "areacode": "805",
-                "body": "215-3959"
+                "body": "215 3959",
+                "body1": "215",
+                "body2": "3959"
             }
         },
         "email": "afleming@slonoorfoundation.org"
     },
     "prescribers": {
         "Russell Ness MD": {
-            "first": "Russell",
-            "last": "Ness",
-            "name": "Russell Ness, MD",
-            "type": "MD",
-            "DEA": "",
+            "DEA": "AN6215746",
             "NPI": "1770552978",
-            "SLN": "G 27268"
+            "SLN": "G27268"
+        },
+        "Scott Bisheff MD": {
+            "DEA": "BB5974250",
+            "NPI": "1871541748",
+            "SLN": "A66055 "
+        },
+        "Deborah Cherry MD": {
+            "DEA": "BC1246493",
+            "NPI": "",
+            "SLN": "61844"
+        },
+        "Rupert Chowins OD": {
+            "DEA": "MC0655730",
+            "NPI": "1750368304",
+            "SLN": "8693G"
+        },
+        "Elizabeth Chowins OD": {
+            "DEA": "OP9968000",
+            "NPI": "1295828341",
+            "SLN": "8693G"
+        },
+        "Grace Crittenden MD": {
+            "DEA": "AC8212766",
+            "NPI": "1053343764",
+            "SLN": "G65487"
+        },
+        "Eric Dunlop MD": {
+            "DEA": "FD2417738",
+            "NPI": "1225334618",
+            "SLN": "20A11326"
+        },
+        "Mark K Eckert MD": {
+            "DEA": "AE6790910",
+            "NPI": "1568410173",
+            "SLN": "G31187"
+        },
+        "Maryellen Eham MD": {
+            "DEA": "ME0813700",
+            "NPI": "",
+            "SLN": "416569"
+        },
+        "Cecilia Lomeli MD": {
+            "DEA": "ML1973519",
+            "NPI": "1891986675",
+            "SLN": "4911"
+        },
+        "John Massaro MD": {
+            "DEA": "BB6876912",
+            "NPI": "1588665293",
+            "SLN": "20A7971"
+        },
+        "Robert Meyers MD": {
+            "DEA": "BM6824583",
+            "NPI": "1437359767",
+            "SLN": "G60181"
+        },
+        "Ahmad Nooristani MD": {
+            "DEA": "FN1006370",
+            "NPI": "1659537306",
+            "SLN": "G60181"
+        },
+        "Carolyn Smith MD": {
+            "DEA": "M50707781",
+            "NPI": "1114128956",
+            "SLN": "PA14769"
+        },
+        "John Steen MD": {
+            "DEA": "",
+            "NPI": "1144248881",
+            "SLN": "G44348"
+        },
+        "Gregory Thomas MD": {
+            "DEA": "AT1362362",
+            "NPI": "",
+            "SLN": "G46138"
+        },
+        "Charlene Sheridan MD": {
+            "DEA": "MR1172042",
+            "NPI": "1245214469",
+            "SLN": "CA13198"
+        },
+        "Krista Blanchard NP": {
+            "DEA": "MB2278667",
+            "NPI": "1528112729",
+            "SLN": "54297"
+        },
+        "Nancy O’Malley MD": {
+            "DEA": "BO9055092",
+            "NPI": "1306030192",
+            "SLN": "G87546"
+        },
+        "Amanda Weir NP": {
+            "DEA": "MA2869367",
+            "SLN": "642431",
+            "NPI": "1871730747"
         }
     },
     "companies": {
@@ -51,8 +152,8 @@
                 {"attribute": "noor.address.city", "page": 2, "x": 285, "y": 570, "size": 10},
                 {"attribute": "noor.address.state", "page": 2, "x": 420, "y": 570, "size": 10},
                 {"attribute": "noor.address.zip", "page": 2, "x": 510, "y": 570, "size": 10},
-                {"attribute": "noor.phone.areacode", "page": 2, "x": 90, "y": 531, "size": 10},
-                {"attribute": "noor.phone.body", "page": 2, "x": 125, "y": 531, "size": 10},
+                {"attribute": "noor.office_contact.phone.areacode", "page": 2, "x": 90, "y": 531, "size": 10},
+                {"attribute": "noor.office_contact.phone.body", "page": 2, "x": 125, "y": 531, "size": 10},
                 {"attribute": "noor.email", "page": 2, "x": 441, "y": 531, "size": 9},
                 {"attribute": "prescriber.name", "page": 2, "x": 125, "y": 412, "size": 10},
                 {"attribute": "noor.phone.areacode", "page": 2, "x": 330, "y": 412, "size": 10},
@@ -76,16 +177,232 @@
                 {"attribute": "patient.last", "page": 3, "x": 280, "y": 666, "size": 10},
                 {"attribute": "shapes.check", "page": 3, "x": 305, "y": 375, "size": 12},
                 {"attribute": "shapes.check", "page": 3, "x": 286, "y": 190, "size": 12}
+            ],
+            "missing": [
+                "Social Security Number x 2",
+                "New Application or Re-enrollment",
+                "Medication",
+                "Prescriber Signature",
+                "Income",
+                "Applicant Signature"
+            ]
+        },
+        "GSK": {
+            "pdf": "assets/GSK-PAP-English.pdf",
+            "boxes": [
+                {"attribute": "patient.first", "page": 1, "x": 85, "y": 628, "size": 10},
+                {"attribute": "patient.last", "page": 1, "x": 238, "y": 628, "size": 10},
+                {"attribute": "patient.last", "page": 1, "x": 238, "y": 628, "size": 10},
+                {"attribute": "noor.address.street", "page": 1, "x": 100, "y": 600, "size": 10},
+                {"attribute": "noor.address.city", "page": 1, "x": 333, "y": 600, "size": 10},
+                {"attribute": "noor.address.state", "page": 1, "x": 457, "y": 600, "size": 10},
+                {"attribute": "noor.address.zip", "page": 1, "x": 505, "y": 600, "size": 10},
+                {"attribute": "noor.office_contact.phone.areacode", "page": 1, "x": 101, "y": 568, "size": 10},
+                {"attribute": "noor.office_contact.phone.body", "page": 1, "x": 138, "y": 568, "size": 10},
+                {"attribute": "patient.dob.month", "page": 1, "x": 273, "y": 568, "size": 10},
+                {"attribute": "patient.dob.day", "page": 1, "x": 306, "y": 568, "size": 10},
+                {"attribute": "patient.dob.year", "page": 1, "x": 340, "y": 568, "size": 10},
+                {"attribute": "shapes.check", "page": 1, "x": 358, "y": 509, "size": 12},
+
+                {"attribute": "patient.name", "page": 1, "x": 100, "y": 693, "size": 10},
+                {"attribute": "patient.dob.full", "page": 1, "x": 476, "y": 693, "size": 10},
+                {"attribute": "patient.name", "page": 2, "x": 100, "y": 695, "size": 10},
+                {"attribute": "patient.dob.full", "page": 2, "x": 476, "y": 695, "size": 10},
+                {"attribute": "patient.name", "page": 3, "x": 100, "y": 695, "size": 10},
+                {"attribute": "patient.dob.full", "page": 3, "x": 476, "y": 695, "size": 10}
+            ],
+            "missing": [
+                "Gender",
+                "Social Security Number",
+                "Household Size and Income",
+                "Allergies",
+                "Health Conditions",
+                "Applicant Signature"
+            ]
+        },
+        "Merck": {
+            "pdf": "assets/merck.pdf",
+            "boxes": [
+                {"attribute": "patient.first", "page": 0, "x": 113, "y": 1279, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "patient.last", "page": 0, "x": 83, "y": 1258, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "shapes.check", "page": 0, "x": 555, "y": 1279, "size": 14},
+                {"attribute": "noor.address.street", "page": 0, "x": 74, "y": 1239, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "noor.address.city", "page": 0, "x": 59, "y": 1217, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "noor.address.state", "page": 0, "x": 441, "y": 1217, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "noor.address.zip", "page": 0, "x": 507, "y": 1217, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "noor.office_contact.phone.areacode", "page": 0, "x": 69, "y": 1196, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "noor.office_contact.phone.body1", "page": 0, "x": 124, "y": 1196, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "noor.office_contact.phone.body2", "page": 0, "x": 178, "y": 1196, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "patient.dob.month", "page": 0, "x": 311, "y": 1196, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "patient.dob.day", "page": 0, "x": 349, "y": 1196, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "patient.dob.year", "page": 0, "x": 386, "y": 1196, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "noor.email", "page": 0, "x": 228, "y": 1171, "size": 16},
+                {"attribute": "shapes.check", "page": 0, "x": 581, "y": 1151, "size": 10},
+                {"attribute": "shapes.check", "page": 0, "x": 483, "y": 1054, "size": 18},
+
+                {"attribute": "patient.first", "page": 1, "x": 127, "y": 1290, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "patient.last", "page": 1, "x": 98, "y": 1270, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "patient.dob.month", "page": 1, "x": 105, "y": 1248, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "patient.dob.day", "page": 1, "x": 143, "y": 1248, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "patient.dob.year", "page": 1, "x": 180, "y": 1248, "size": 18, "uppercase": true, "monospace": true, "gap": 16.4},
+                {"attribute": "prescriber.SLN", "page": 1, "x": 203, "y": 1160, "size": 12},
+                {"attribute": "prescriber.first", "page": 1, "x": 136, "y": 993, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "prescriber.last", "page": 1, "x": 136, "y": 971, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "prescriber.type", "page": 1, "x": 143, "y": 948, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.practice_name", "page": 1, "x": 132, "y": 925, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.address.street", "page": 1, "x": 120, "y": 880, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.address.city", "page": 1, "x": 73, "y": 834, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.address.state", "page": 1, "x": 438, "y": 834, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.address.zip", "page": 1, "x": 500, "y": 834, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.phone.areacode", "page": 1, "x": 103, "y": 811, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.phone.body1", "page": 1, "x": 164, "y": 811, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.phone.body2", "page": 1, "x": 224, "y": 811, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.fax.areacode", "page": 1, "x": 98, "y": 788, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.fax.body1", "page": 1, "x": 158, "y": 788, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.fax.body2", "page": 1, "x": 219, "y": 788, "size": 18, "uppercase": true, "monospace": true, "gap": 18},
+                {"attribute": "noor.office_contact.name", "page": 1, "x": 128, "y": 767, "size": 12},
+                {"attribute": "noor.email", "page": 1, "x": 348, "y": 767, "size": 12}
+            ],
+            "missing": [
+                "Income and Household Size",
+                "Patient Signature x 2",
+                "Prescription",
+                "Prescriber Signature x 2",
+                "Allergies",
+                "Medical Conditions",
+                "Current Medications"
+            ]
+        },
+        "Pfizer - Group A - Primary Care": {
+            "pdf": "assets/pfizer_group_A.pdf",
+            "boxes": [
+                {"attribute": "patient.name", "page": 2, "x": 116, "y": 684, "size": 10},
+                {"attribute": "noor.address.street", "page": 2, "x": 122, "y": 667, "size": 10},
+                {"attribute": "noor.address.city", "page": 2, "x": 307, "y": 667, "size": 10},
+                {"attribute": "noor.address.state", "page": 2, "x": 437, "y": 667, "size": 10},
+                {"attribute": "noor.address.zip", "page": 2, "x": 520, "y": 667, "size": 10},
+                {"attribute": "noor.email", "page": 2, "x": 85, "y": 651, "size": 10},
+                {"attribute": "noor.office_contact.phone.full", "page": 2, "x": 309, "y": 651, "size": 10},
+                {"attribute": "shapes.check", "page": 2, "x": 401, "y": 524, "size": 12},
+                {"attribute": "prescriber.name", "page": 3, "x": 155, "y": 632, "size": 10},
+                {"attribute": "prescriber.DEA", "page": 3, "x": 85, "y": 616, "size": 10},
+                {"attribute": "prescriber.NPI", "page": 3, "x": 217, "y": 616, "size": 10},
+                {"attribute": "prescriber.SLN", "page": 3, "x": 467, "y": 616, "size": 10},
+                {"attribute": "noor.address.street", "page": 3, "x": 150, "y": 600, "size": 10},
+                {"attribute": "noor.address.city", "page": 3, "x": 76, "y": 583, "size": 10},
+                {"attribute": "noor.address.state", "page": 3, "x": 345, "y": 583, "size": 10},
+                {"attribute": "noor.address.zip", "page": 3, "x": 439, "y": 583, "size": 10},
+                {"attribute": "noor.address.zip", "page": 3, "x": 439, "y": 583, "size": 10},
+                {"attribute": "noor.phone.full", "page": 3, "x": 85, "y": 568, "size": 10},
+                {"attribute": "noor.fax.full", "page": 3, "x": 339, "y": 568, "size": 10},
+                {"attribute": "noor.email", "page": 3, "x": 162, "y": 550, "size": 10},
+                {"attribute": "patient.name", "page": 3, "x": 114, "y": 467, "size": 10},
+                {"attribute": "prescriber.name", "page": 4, "x": 239, "y": 469, "size": 12},
+                {"attribute": "noor.practice_name", "page": 4, "x": 39, "y": 131, "size": 12}
+            ],
+            "missing": [
+                "New Application or Re-enrollment",
+                "Household Size and Income",
+                "Financial Documentation Attached",
+                "Patient Signature x 2",
+                "Prescription information",
+                "Prescriber Signature"
+            ]
+        },
+        "Pfizer - Group B - Includes Sildenafil": {
+            "pdf": "assets/pfizer_group_B.PDF",
+            "boxes": [
+                {"attribute": "patient.name", "page": 2, "x": 116, "y": 714, "size": 10},
+                {"attribute": "noor.address.street", "page": 2, "x": 152, "y": 665, "size": 10},
+                {"attribute": "noor.address.city", "page": 2, "x": 72, "y": 647, "size": 10},
+                {"attribute": "noor.address.state", "page": 2, "x": 280, "y": 647, "size": 10},
+                {"attribute": "noor.address.zip", "page": 2, "x": 409, "y": 647, "size": 10},
+                {"attribute": "noor.email", "page": 2, "x": 81, "y": 586, "size": 10},
+                {"attribute": "noor.office_contact.phone.full", "page": 2, "x": 314, "y": 586, "size": 10},
+                {"attribute": "patient.dob.full", "page": 2, "x": 492, "y": 585, "size": 10},
+                {"attribute": "shapes.check", "page": 2, "x": 445, "y": 521, "size": 12},
+                {"attribute": "patient.first", "page": 3, "x": 101, "y": 541, "size": 10},
+                {"attribute": "patient.last", "page": 3, "x": 363, "y": 541, "size": 10},
+                {"attribute": "patient.dob.full", "page": 3, "x": 110, "y": 508, "size": 10},
+                {"attribute": "noor.office_contact.phone.full", "page": 3, "x": 350, "y": 508, "size": 10},
+                {"attribute": "prescriber.name", "page": 3, "x": 196, "y": 360, "size": 10},
+                {"attribute": "prescriber.name", "page": 4, "x": 154, "y": 698, "size": 10},
+                {"attribute": "prescriber.NPI", "page": 4, "x": 85, "y": 680, "size": 10},
+                {"attribute": "prescriber.SLN", "page": 4, "x": 120, "y": 663, "size": 10},
+                {"attribute": "prescriber.DEA", "page": 4, "x": 430, "y": 663, "size": 10},
+                {"attribute": "noor.office_contact.name", "page": 4, "x": 142, "y": 646, "size": 10},
+                {"attribute": "noor.practice_name", "page": 4, "x": 126, "y": 629, "size": 10},
+                {"attribute": "noor.address.street", "page": 4, "x": 121, "y": 611, "size": 10},
+                {"attribute": "noor.address.city", "page": 4, "x": 75, "y": 595, "size": 10},
+                {"attribute": "noor.address.state", "page": 4, "x": 343, "y": 595, "size": 10},
+                {"attribute": "noor.address.zip", "page": 4, "x": 439, "y": 595, "size": 10},
+                {"attribute": "noor.phone.full", "page": 4, "x": 83, "y": 577, "size": 10},
+                {"attribute": "noor.fax.full", "page": 4, "x": 338, "y": 577, "size": 10},
+                {"attribute": "noor.email", "page": 4, "x": 160, "y": 559, "size": 10},
+                {"attribute": "prescriber.name", "page": 6, "x": 230, "y": 478, "size": 12},
+                {"attribute": "noor.practice_name", "page": 6, "x": 41, "y": 153, "size": 12}
+            ],
+            "missing": [
+                "New Application or Re-enrollment",
+                "Household Size and Income",
+                "Patient Signature x 2",
+                "Financial Documentation Attached",
+                "Prescription information",
+                "Allergies",
+                "Current Medications",
+                "Health Conditions",
+                "Prescriber Signature x 2",
+                "Specific ICD 10 Code"
+            ]
+        },
+        "Pfizer - Group D - Lyrica CR/CV": {
+            "pdf": "assets/pfizer_group_D.PDF",
+            "boxes": [
+                {"attribute": "patient.name", "page": 2, "x": 116, "y": 666, "size": 10},
+                {"attribute": "noor.address.street", "page": 2, "x": 157, "y": 648, "size": 10},
+                {"attribute": "noor.address.city", "page": 2, "x": 77, "y": 631, "size": 10},
+                {"attribute": "noor.address.state", "page": 2, "x": 322, "y": 631, "size": 10},
+                {"attribute": "noor.address.zip", "page": 2, "x": 472, "y": 631, "size": 10},
+                {"attribute": "noor.email", "page": 2, "x": 88, "y": 566, "size": 10},
+                {"attribute": "noor.office_contact.phone.full", "page": 2, "x": 343, "y": 566, "size": 10},
+                {"attribute": "patient.dob.full", "page": 2, "x": 131, "y": 550, "size": 10},
+                {"attribute": "shapes.check", "page": 2, "x": 347, "y": 358, "size": 12},
+                {"attribute": "prescriber.name", "page": 4, "x": 155, "y": 652, "size": 10},
+                {"attribute": "prescriber.DEA", "page": 4, "x": 85, "y": 639, "size": 10},
+                {"attribute": "prescriber.SLN", "page": 4, "x": 386, "y": 639, "size": 10},
+                {"attribute": "prescriber.NPI", "page": 4, "x": 85, "y": 621, "size": 10},
+                {"attribute": "noor.address.street", "page": 4, "x": 121, "y": 607, "size": 10},
+                {"attribute": "noor.email", "page": 4, "x": 385, "y": 607, "size": 10},
+                {"attribute": "noor.address.city", "page": 4, "x": 78, "y": 592, "size": 10},
+                {"attribute": "noor.address.state", "page": 4, "x": 348, "y": 592, "size": 10},
+                {"attribute": "noor.address.zip", "page": 4, "x": 441, "y": 592, "size": 10},
+                {"attribute": "noor.phone.full", "page": 4, "x": 87, "y": 575, "size": 10},
+                {"attribute": "noor.fax.full", "page": 4, "x": 342, "y": 575, "size": 10},
+                {"attribute": "prescriber.name", "page": 6, "x": 239, "y": 469, "size": 12},
+                {"attribute": "noor.practice_name", "page": 6, "x": 41, "y": 132, "size": 12}
+            ],
+            "missing": [
+                "New Application or Re-enrollment",
+                "gender", 
+                "Household Size and Income",
+                "Financial Documentation Attached",
+                "Patient Signature x 2",
+                "Drug Allergies",
+                "List of current medications",
+                "Prescriber Signature"
             ]
         }
     },
+    "This section": "is gross but very convenient",
     "default": {
         "patient": {
             "dob": {
                 "month": "",
                 "day": "",
-                "year": ""
+                "year": "",
+                "full": ""
             },
+            "name": "",
             "first": "",
             "last": ""
         },
@@ -104,8 +421,10 @@
         "dob": {
             "month": "",
             "day": "",
-            "year": ""
+            "year": "",
+            "full": ""
         },
+        "name": "",
         "first": "",
         "last": ""
     },

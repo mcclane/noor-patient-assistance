@@ -99,9 +99,14 @@ THE SOFTWARE.
 
 @angular/material/sidenav
 
+@angular/material/snack-bar
+
 @angular/material/tabs
 
 @angular/platform-browser
+MIT
+
+@pdf-lib/fontkit
 MIT
 
 @pdf-lib/standard-fonts
