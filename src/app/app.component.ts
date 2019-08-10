@@ -5,11 +5,14 @@ import {map, startWith} from 'rxjs/operators';
 import { MatSnackBar } from "@angular/material";
 
 
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { PDFDocument, rgb, StandardFonts, RemovePageFromEmptyDocumentError } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 var fontBytes = undefined;
 
 import config from '../assets/config.json';
+
+const reducer = (accumulator, currentValue) => accumulator[currentValue];
+
 
 @Component({
   selector: 'app-root',
@@ -23,9 +26,10 @@ export class AppComponent {
   prescriberOptions: string[] = Object.keys(config.prescribers);
   filteredPrescriberOptions: Observable<string[]>;
   infoForm = new FormBuilder().group({'patient-name': '', 'patient-dob': '', 'prescriber':'', 'company':''});
-  configOptions: string[] = Object.keys(config);
+  configOptions: string[] = [];
   config = config;
   snackBar: MatSnackBar;
+  reducer = reducer;
 
   constructor(private _snackBar: MatSnackBar) {}
 
@@ -74,11 +78,24 @@ export class AppComponent {
     }
     if(company in config.companies) {
       config.company = company;
+      this.configOptions = config.companies[company].boxes;
     }
     fillPDF(config);
 
     // Display the snack bar telling us we have some missing parts of the field
-    this._snackBar.open(`Don't forget to fill in: ${config.companies[config.company].missing.join(", ")}`, "OK", {duration: 0});
+    // this._snackBar.open(`Don't forget to fill in: ${config.companies[config.company].missing.join(", ")}`, "OK", {duration: 0});
+  }
+  getValueFromConfig(attribute) {
+      return attribute.split(".").reduce(this.reducer, this.config);
+  }
+  updateConfigValue(attribute, newValue) {
+    let path = attribute.split(".").slice(0, -1)
+    let last = attribute.split(".").slice(-1)[0];
+    let parent = this.getValueFromConfig(path.join("."));
+    parent[last] = newValue;
+  }
+  updateConfig(option, event) {
+    this.updateConfigValue(option.attribute, event.target.value);
   }
 }
 
@@ -110,7 +127,6 @@ async function fillPDF(options) {
   const font = await pdf.embedFont(fontBytes);
   const pages = pdf.getPages();
   // function to get nested keys
-  const reducer = (accumulator, currentValue) => accumulator[currentValue];
   options.companies[options.company].boxes.forEach(box => {
     console.log(box);
     let text = box.attribute.split(".").reduce(reducer, options);
