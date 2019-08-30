@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { } from '@angular/material/autocomplete';
-import { MatSnackBarModule, MatListModule, MatTreeModule, MatButtonModule, MatSelectModule, MatSidenavModule, MatDividerModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule, MatTabsModule, MatSnackBar } from '@angular/material';
+import { MatCheckboxModule, MatSnackBarModule, MatListModule, MatTreeModule, MatButtonModule, MatSelectModule, MatSidenavModule, MatDividerModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule, MatTabsModule, MatSnackBar } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 
 @NgModule({
     imports: [
+        MatCheckboxModule,
         MatSnackBarModule,
         MatListModule,
         MatTreeModule,
@@ -21,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
         MatButtonModule,
     ],
     exports: [
+        MatCheckboxModule,
         MatSnackBarModule,
         MatListModule,
         MatTreeModule,

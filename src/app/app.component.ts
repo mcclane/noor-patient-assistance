@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, startWith, bufferCount } from 'rxjs/operators';
 import { MatSnackBar } from "@angular/material";
 
 
@@ -11,8 +11,6 @@ var fontBytes = undefined;
 
 import config from '../assets/config.json';
 
-const reducer = (accumulator, currentValue) => accumulator[currentValue];
-
 
 @Component({
   selector: 'app-root',
@@ -21,17 +19,51 @@ const reducer = (accumulator, currentValue) => accumulator[currentValue];
 })
 export class AppComponent {
   title = 'Patient Assistance Form Filler';
+  config = config;
+  userSelections = {
+    "name": "",
+    "dob": "",
+    "prescriber": "",
+    "company": ""
+  };
+  boxes: object[] = [];
+  current_pdf_url: string = "";
+
   drug_companies: string[] = Object.keys(config.companies);
   myControl = new FormControl();
+
   prescriberOptions: string[] = Object.keys(config.prescribers);
   filteredPrescriberOptions: Observable<string[]>;
-  infoForm = new FormBuilder().group({'patient-name': '', 'patient-dob': '', 'prescriber':'', 'company':''});
-  configOptions: string[] = [];
-  config = config;
-  snackBar: MatSnackBar;
-  reducer = reducer;
 
-  constructor(private _snackBar: MatSnackBar) {}
+  infoForm = new FormBuilder().group({ 'patient-name': '', 'patient-dob': '', 'prescriber': '', 'company': '' });
+  snackBar: MatSnackBar;
+
+
+  updateUserSelection(key, value) {
+    this.userSelections[key] = value;
+  }
+
+  updateCompany(company: string) {
+    this.userSelections['company'] = company;
+    this.config.companies[company].boxes.forEach((box) => {
+      box.value = this.config.defaults[box.attribute];
+      this.boxes.push(box);
+    })
+  }
+
+  updateBoxValue(box, value) {
+    box.value = value;
+  }
+
+  updateAttribute(boxes, attribute, value) {
+    for (let i = 0; i < boxes.length; i++) {
+      if (boxes[i].attribute === attribute) {
+        boxes[i].value = value;
+      }
+    }
+  }
+
+  constructor(private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.filteredPrescriberOptions = this.myControl.valueChanges
@@ -46,65 +78,79 @@ export class AppComponent {
     return this.prescriberOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  clickGenerateButton(patient, dob, prescriber, company) {
+  clickGenerateButton() {
 
-    // Reset the values in the dictionary to defaults, which are blank. This isn't great but it works
-    config.patient = config.default.patient;
-    config.prescriber = config.default.prescriber;
-    config.company = config.default.company;
+    if (!(this.userSelections.company in config.companies)) {
+      return;
+    }
+
+    this.boxes = [];
+    this.config.companies[this.userSelections.company].boxes.forEach((box) => {
+      box.value = this.config.defaults[box.attribute];
+      this.boxes.push(box);
+    })
+
+
+    let patient = this.userSelections.name;
+    let dob = this.userSelections.dob;
+    let prescriber = this.userSelections.prescriber;
 
     let splt = patient.split(' ');
-    if(splt.length >= 2) {
-      config.patient.name = patient;
-      config.patient.first = splt[0];
-      config.patient.last = splt[1];
+    if (splt.length >= 2) {
+      this.updateAttribute(this.boxes, "patient.name", patient);
+      this.updateAttribute(this.boxes, "patient.first", splt[0]);
+      this.updateAttribute(this.boxes, "patient.last", splt[1]);
     }
 
     splt = dob.split('/');
-    if(splt.length >= 3) {
-      config.patient.dob.full = dob;
-      config.patient.dob.month = splt[0];
-      config.patient.dob.day = splt[1];
-      config.patient.dob.year = splt[2];
+    if (splt.length >= 3) {
+      this.updateAttribute(this.boxes, "patient.dob.full", dob);
+      this.updateAttribute(this.boxes, "patient.dob.month", splt[0]);
+      this.updateAttribute(this.boxes, "patient.dob.day", splt[1]);
+      this.updateAttribute(this.boxes, "patient.dob.year", splt[2]);
     }
-    if(prescriber in config.prescribers) {
-      config.prescriber = config.prescribers[prescriber]; // This contains the DEA, SLN, and NPI numbers
+
+    if (prescriber in config.prescribers) {
+      let p = config.prescribers[prescriber];
       var first, last, type;
       [first, last, type] = prescriber.split(" ");
-      config.prescriber.first = first;
-      config.prescriber.last = last;
-      config.prescriber.type = type;
-      config.prescriber.name = `${first} ${last}, ${type}`;
+      this.updateAttribute(this.boxes, "prescriber.name", prescriber);
+      this.updateAttribute(this.boxes, "prescriber.first", first);
+      this.updateAttribute(this.boxes, "prescriber.last", last);
+      this.updateAttribute(this.boxes, "prescriber.type", type);
+      this.updateAttribute(this.boxes, "prescriber.DEA", p.DEA);
+      this.updateAttribute(this.boxes, "prescriber.SLN", p.SLN);
+      this.updateAttribute(this.boxes, "prescriber.NPI", p.NPI);
     }
-    if(company in config.companies) {
-      config.company = company;
-      this.configOptions = config.companies[company].boxes;
-    }
-    fillPDF(config);
+
+    this.current_pdf_url = this.config.companies[this.userSelections.company].pdf;
+
+    // Push something to force an update of the options input boxes
+    this.boxes.push({
+      "attribute": "placeholder",
+      "value": "",
+      "page": 0,
+      "x": 0,
+      "y": 0,
+      "size": 0
+    });
+
+    fillPDF(this.current_pdf_url, this.boxes);
 
     // Display the snack bar telling us we have some missing parts of the field
     // this._snackBar.open(`Don't forget to fill in: ${config.companies[config.company].missing.join(", ")}`, "OK", {duration: 0});
   }
-  getValueFromConfig(attribute) {
-      return attribute.split(".").reduce(this.reducer, this.config);
-  }
-  updateConfigValue(attribute, newValue) {
-    let path = attribute.split(".").slice(0, -1)
-    let last = attribute.split(".").slice(-1)[0];
-    let parent = this.getValueFromConfig(path.join("."));
-    parent[last] = newValue;
-  }
-  updateConfig(option, event) {
-    this.updateConfigValue(option.attribute, event.target.value);
+  clickUpdateFromOptions() {
+    fillPDF(this.current_pdf_url, this.boxes);
   }
 }
 
 function renderInIframe(pdfBytes) {
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-    const blobUrl = URL.createObjectURL(blob);
-    let iframe: any;
-    iframe = document.getElementById('iframe');
-    iframe.src = blobUrl;
+  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const blobUrl = URL.createObjectURL(blob);
+  let iframe: any;
+  iframe = document.getElementById('iframe');
+  iframe.src = blobUrl;
 }
 
 async function getFontBytes() {
@@ -112,44 +158,43 @@ async function getFontBytes() {
   return await res.arrayBuffer();
 }
 
-async function getPDF(url) {
-    const pdfBuffer = await fetch(url).then((res) => res.arrayBuffer())
-    const pdfDoc = await PDFDocument.load(pdfBuffer)
-    return pdfDoc
+async function getPDF(url: string) {
+  const pdfBuffer = await fetch(url).then((res) => res.arrayBuffer())
+  const pdfDoc = await PDFDocument.load(pdfBuffer)
+  return pdfDoc
 }
 
-async function fillPDF(options) {
-  let pdf = await getPDF(options.companies[options.company].pdf);
+async function fillPDF(pdf_url: string, boxes) {
+  let pdf = await getPDF(pdf_url);
   pdf.registerFontkit(fontkit);
-  if(fontBytes == undefined) {
+  if (fontBytes == undefined) {
     fontBytes = await getFontBytes();
   }
   const font = await pdf.embedFont(fontBytes);
   const pages = pdf.getPages();
-  // function to get nested keys
-  options.companies[options.company].boxes.forEach(box => {
+  boxes.forEach(box => {
     console.log(box);
-    let text = box.attribute.split(".").reduce(reducer, options);
-    if(box.uppercase) {
+    let text = box.value;
+    if (box.uppercase) {
       text = text.toUpperCase();
     }
-    if(box.monospace) {
+    if (box.monospace) {
       var i = 0;
-      for(i = 0;i < text.length;i++) {
+      for (i = 0; i < text.length; i++) {
         pages[box.page].drawText(text[i], {
-            x: box.x + (i*box.gap),
-            y: box.y,
-            size: box.size,
-            font: font
+          x: box.x + (i * box.gap),
+          y: box.y,
+          size: box.size,
+          font: font
         })
       }
     }
     else {
       pages[box.page].drawText(text, {
-          x: box.x,
-          y: box.y,
-          size: box.size,
-          font: font
+        x: box.x,
+        y: box.y,
+        size: box.size,
+        font: font
       });
     }
   });

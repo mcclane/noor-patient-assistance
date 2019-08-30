@@ -1,50 +1,64 @@
 <html>
-    <body>
-        <mat-drawer-container class="example-container">
-            <mat-drawer mode="side" opened class="left-side">
-                <div>
-                    <mat-tab-group>
-                        <mat-tab label="Prescriber/Patient">
-                            <form class="example-form" [formGroup]="infoForm" (ngSubmit)="clickGenerateButton(patient.value, dob.value, prescriber.value, company.value)">
-                                <mat-form-field class="patient-name-input">
-                                    <input #patient type="text" matInput placeholder="Patient Name" formControlName="patient-name">
-                                </mat-form-field>
-                                <mat-form-field class="patient-dob-input">
-                                    <input #dob type="text" matInput placeholder="Patient DOB (MM/DD/YYYY)" formControlName="patient-dob">
-                                </mat-form-field>
-                                <br>
-                                <mat-form-field class="prescriber-name-input">
-                                    <input #prescriber type="text" matInput placeholder="Prescriber" [formControl]="myControl" [matAutocomplete]="auto" formControlName="prescriber">
-                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                        <mat-option *ngFor="let option of filteredPrescriberOptions | async" [value]="option">
-                                            {{option}}
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                </mat-form-field>
-                                <mat-form-field class="company-name-input">
-                                    <mat-label>Drug Company</mat-label>
-                                    <mat-select #company formControlName="company" value="AstraZeneca">
-                                        <mat-option *ngFor="let company of drug_companies" [value]="company">
-                                            {{company}}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
 
-                                <button type="submit" mat-stroked-button color="accent">Generate PDF</button>
-                            </form>
-                            <br>
-                        </mat-tab>
-                        <mat-tab label="Options">
-                            <mat-form-field *ngFor="let option of configOptions">
-                                <input matInput type="text" (change)="updateConfig(option, $event)" [placeholder]="option.attribute" [value]="getValueFromConfig(option.attribute)">
+<body>
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened class="left-side">
+            <div>
+                <mat-tab-group>
+                    <mat-tab label="Prescriber/Patient">
+                        <form class="example-form" [formGroup]="infoForm" (ngSubmit)="clickGenerateButton()">
+                            <mat-form-field class="patient-name-input">
+                                <input #patient (change)="updateUserSelection('name', $event.target.value)" type="text"
+                                    matInput placeholder="Patient Name" formControlName="patient-name">
                             </mat-form-field>
-                        </mat-tab>
-                    </mat-tab-group>
-                </div>
-            </mat-drawer>
-            <mat-drawer-content class="right-side">
-                <iframe class="pdf-iframe" id='iframe'>Your PDF will show up here</iframe>
-            </mat-drawer-content>
-        </mat-drawer-container>
-    </body>
+                            <mat-form-field class="patient-dob-input">
+                                <input #dob (change)="updateUserSelection('dob', $event.target.value)" type="text"
+                                    matInput placeholder="Patient DOB (MM/DD/YYYY)" formControlName="patient-dob">
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="prescriber-name-input">
+                                <input #prescriber (change)="updateUserSelection('prescriber', $event.target.value)"
+                                    type="text" matInput placeholder="Prescriber" [formControl]="myControl"
+                                    [matAutocomplete]="auto" formControlName="prescriber">
+                                <mat-autocomplete
+                                    (optionSelected)="updateUserSelection('prescriber', $event.option.value)"
+                                    autoActiveFirstOption #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredPrescriberOptions | async"
+                                        [value]="option">
+                                        {{option}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            <mat-form-field class="company-name-input">
+                                <mat-label>Drug Company</mat-label>
+                                <mat-select #company (selectionChange)="updateUserSelection('company', $event.value)"
+                                    formControlName="company" value="AstraZeneca">
+                                    <mat-option *ngFor="let company of drug_companies" [value]="company">
+                                        {{company}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <button type="submit" mat-stroked-button color="accent">Generate PDF</button>
+                        </form>
+                        <br>
+                    </mat-tab>
+                    <mat-tab label="Options">
+                        <form (ngSubmit)="clickUpdateFromOptions()">
+                            <button type="submit" mat-stroked-button color="accent">Update PDF</button><br>
+                            <mat-form-field *ngFor="let box of boxes">
+                                <input matInput type="text" (change)="updateBoxValue(box, $event.target.value)"
+                                    [placeholder]="box.attribute" [value]="box.value">
+                            </mat-form-field>
+                        </form>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </mat-drawer>
+        <mat-drawer-content class="right-side">
+            <iframe class="pdf-iframe" id='iframe'>Your PDF will show up here</iframe>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</body>
+
 </html>
